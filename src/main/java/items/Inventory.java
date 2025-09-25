@@ -30,10 +30,8 @@ public class Inventory implements Iterable<ItemStack>, Cloneable
      */
     public static void mergeStacks(ItemStack lhs, ItemStack rhs)
     {
-        // Refer to the notes from Assignment 1
-    	////I think the best method to approach this is to iterate over all the stuff from ItemStack rhs you need to take from
-    	////and then place it in lhs
-    	
+    	lhs.addItems(rhs.size());
+    	rhs.addItems(-rhs.size());
     }
 
     /**
@@ -228,10 +226,10 @@ public class Inventory implements Iterable<ItemStack>, Cloneable
         StringBuilder strBld = new StringBuilder();
         strBld.append(summaryLine);
 
-        // Add the missing loop
-        for (ItemStack item: this.slots) {
-        	strBld.append(item.toString());
-        	strBld.append(System.lineSeparator());
+        Iterator<ItemStack> iter = this.slots.iterator(); 
+        while (iter.hasNext()) {
+        	String info = String.format(" %s%n", iter.next().toString());
+        	strBld.append(info);
         }
 
         return strBld.toString();
