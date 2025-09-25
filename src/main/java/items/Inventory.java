@@ -175,9 +175,7 @@ public class Inventory implements Iterable<ItemStack>, Cloneable
         for (ItemStack item: this.slots) {
         	copy.slots.add(item);
         }
-        ////copy.slots.addAll(slots);
-        ////why doesn't that work?
-        // Add the missing copy logic (loop)
+        ////copy.slots.addAll(slots); also works but the comments requested a loop
 
         return copy;
     }
