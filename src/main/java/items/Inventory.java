@@ -31,6 +31,9 @@ public class Inventory implements Iterable<ItemStack>, Cloneable
     public static void mergeStacks(ItemStack lhs, ItemStack rhs)
     {
         // Refer to the notes from Assignment 1
+    	////I think the best method to approach this is to iterate over all the stuff from ItemStack rhs you need to take from
+    	////and then place it in lhs
+    	
     }
 
     /**
@@ -94,8 +97,10 @@ public class Inventory implements Iterable<ItemStack>, Cloneable
      */
     public boolean isFull()
     {
-        // Replace the next line
-        return false;
+    	if (totalSlots() == utilizedSlots())
+    		return true;
+    	else
+    		return false;
     }
 
     /**
@@ -118,8 +123,11 @@ public class Inventory implements Iterable<ItemStack>, Cloneable
      */
     public ItemStack findMatchingItemStack(ItemStack key)
     {
-        // Adapt the logic from Assignment 1
-
+    	for (ItemStack item: this.slots) {
+    		if (item.equals(key)) {
+    			return item;
+    		}
+    	}
         return null;
     }
 
@@ -130,7 +138,7 @@ public class Inventory implements Iterable<ItemStack>, Cloneable
      */
     public void addItemStackNoCheck(ItemStack toAdd)
     {
-        // Add the missing (one) line by using `this.slots.add(????)`
+        this.slots.add(toAdd);
     }
 
     /**
@@ -166,7 +174,11 @@ public class Inventory implements Iterable<ItemStack>, Cloneable
     public Inventory clone()
     {
         Inventory copy = new Inventory(this.totalSlots());
-
+        for (ItemStack item: this.slots) {
+        	copy.slots.add(item);
+        }
+        ////copy.slots.addAll(slots);
+        ////why doesn't that work?
         // Add the missing copy logic (loop)
 
         return copy;
@@ -205,6 +217,8 @@ public class Inventory implements Iterable<ItemStack>, Cloneable
      * *Print* a Summary of the Inventory and all Items contained within.
      */
     @Override
+    
+    //Use the string format guide provided for proper line endings
     public String toString()
     {
         String summaryLine = String.format(
@@ -215,6 +229,10 @@ public class Inventory implements Iterable<ItemStack>, Cloneable
         strBld.append(summaryLine);
 
         // Add the missing loop
+        for (ItemStack item: this.slots) {
+        	strBld.append(item.toString());
+        	strBld.append(System.lineSeparator());
+        }
 
         return strBld.toString();
     }
