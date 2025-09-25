@@ -228,7 +228,7 @@ public class Inventory implements Iterable<ItemStack>, Cloneable
 
         Iterator<ItemStack> iter = this.slots.iterator(); 
         while (iter.hasNext()) {
-        	String info = String.format(" %s%n", iter.next().toString());
+        	String info = String.format("  %s%n", iter.next().toString());
         	strBld.append(info);
         }
 
